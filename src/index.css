@@ -1,0 +1,105 @@
+:root {
+  --navy: #060d2e;
+  --navy-mid: #0d1b4b;
+  --blue: #1565C0;
+  --cyan: #00b4d8;
+  --cyan-l: #48cae4;
+  --white: #ffffff;
+  --gray: #8892b0;
+  --glass: rgba(255,255,255,0.05);
+  --glass-b: rgba(255,255,255,0.10);
+  --danger: #ef4444;
+  --success: #10b981;
+  --warn: #f59e0b;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
+h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;letter-spacing:1.5px}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+input,textarea,select{font-family:'DM Sans',sans-serif}
+
+/* BG */
+.bg-mesh{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 10% 20%,rgba(0,180,216,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 90% 80%,rgba(21,101,192,.18) 0%,transparent 60%),linear-gradient(160deg,#060d2e 0%,#0d1b4b 50%,#0a1f50 100%);pointer-events:none}
+.bg-lines{position:fixed;inset:0;z-index:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(0,180,216,.03) 80px,rgba(0,180,216,.03) 81px);pointer-events:none}
+
+/* LAYOUT */
+.page{position:relative;z-index:1;min-height:100vh;padding-top:64px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;border:none;transition:all .2s;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,180,216,.35)}
+.btn-primary:disabled{opacity:.5;transform:none;box-shadow:none}
+.btn-outline{background:transparent;color:var(--cyan);border:1.5px solid rgba(0,180,216,.45)}
+.btn-outline:hover{background:rgba(0,180,216,.1);border-color:var(--cyan)}
+.btn-ghost{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-danger{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
+.btn-danger:hover{background:rgba(239,68,68,.22)}
+.btn-success{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.3)}
+.btn-success:hover{background:rgba(16,185,129,.22)}
+.btn-sm{padding:7px 14px;font-size:13px}
+.btn-full{width:100%;justify-content:center}
+
+/* FORMS */
+.fgroup{margin-bottom:18px}
+.flabel{display:block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:7px}
+.finput{width:100%;padding:12px 16px;background:rgba(0,0,0,.3);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+.finput::placeholder{color:rgba(255,255,255,.22)}
+.finput:focus{border-color:rgba(0,180,216,.6);box-shadow:0 0 0 3px rgba(0,180,216,.1)}
+.finput.err{border-color:rgba(239,68,68,.6)}
+.ferr{font-size:12px;color:var(--danger);margin-top:4px}
+textarea.finput{resize:vertical;min-height:80px;line-height:1.6}
+select.finput{appearance:none}
+
+/* CARD */
+.card{background:rgba(255,255,255,.05);border:1px solid var(--glass-b);border-radius:16px;padding:24px;backdrop-filter:blur(12px)}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.5px}
+.b-pending{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.3)}
+.b-confirmed{background:rgba(0,180,216,.12);color:var(--cyan);border:1px solid rgba(0,180,216,.3)}
+.b-shipped{background:rgba(129,140,248,.12);color:#818cf8;border:1px solid rgba(129,140,248,.3)}
+.b-delivered{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.3)}
+.b-cancelled{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.3)}
+
+/* SPINNER */
+.spin{width:36px;height:36px;border:3px solid rgba(0,180,216,.2);border-top-color:var(--cyan);border-radius:50%;animation:spinning .8s linear infinite}
+@keyframes spinning{to{transform:rotate(360deg)}}
+.spin-sm{width:16px;height:16px;border-width:2px}
+.loading-center{min-height:60vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+
+/* ANIMS */
+@keyframes fadeUp{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.afu{animation:fadeUp .6s ease both}
+.afi{animation:fadeIn .4s ease both}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease}
+.modal{background:#0c1640;border:1px solid var(--glass-b);border-radius:20px;padding:32px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:fadeUp .3s ease}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+td{padding:14px 16px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,.018)}
+
+/* PRODUCT GRID */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.2);font-size:12px;letter-spacing:1px;margin:18px 0}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+
+/* DRAWER */
+@keyframes slideInR{from{transform:translateX(100%)}to{transform:translateX(0)}}
