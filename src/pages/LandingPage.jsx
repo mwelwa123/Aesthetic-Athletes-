@@ -25,10 +25,10 @@ export default function LandingPage() {
             <div style={{ fontSize:9,letterSpacing:3,color:'var(--cyan)',fontWeight:600,textTransform:'uppercase' }}>Fast · Fierce · Fearless</div>
           </div>
         </div>
-        <div style={{ display:'flex',gap:10 }}>
+        {/* <div style={{ display:'flex',gap:10 }}>
           <Link to="/login"    className="btn btn-outline btn-sm">Sign In</Link>
           <Link to="/register" className="btn btn-primary btn-sm">Join Now</Link>
-        </div>
+        </div> */}
       </nav>
 
       {/* Hero */}
