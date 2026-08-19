@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, BarChart2, Trophy, Users, CheckCircle } from 'lucide-react'
+import logo from '../assets/logo.png'
 
 export default function LandingPage() {
   return (
-    <div style={{ minHeight:'100vh',overflowX:'hidden' }}>
+    <div className="landing-page" style={{ minHeight:'100vh',overflowX:'hidden' }}>
       <div className="bg-mesh" /><div className="bg-lines" />
 
       {/* Runner silhouette */}
@@ -17,13 +18,16 @@ export default function LandingPage() {
       </svg>
 
       {/* Nav */}
-      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 48px',background:'rgba(6,13,46,.82)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(255,255,255,.07)' }}>
+      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 48px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
         <div style={{ display:'flex',alignItems:'center',gap:12 }}>
+          <img src={logo} alt="Aesthetic Athletes" style={{ width:178,height:54,objectFit:'contain',display:'block' }} />
+          <div style={{ display:'none' }}>
           <div style={{ width:38,height:38,borderRadius:9,background:'linear-gradient(135deg,var(--cyan),var(--blue))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Bebas Neue',fontSize:16,color:'white' }}>AA</div>
           <div style={{ lineHeight:1 }}>
             <div style={{ fontFamily:'Bebas Neue',fontSize:18,letterSpacing:2 }}>Aesthetic Athletes</div>
             <div style={{ fontSize:9,letterSpacing:3,color:'var(--cyan)',fontWeight:600,textTransform:'uppercase' }}>Fast · Fierce · Fearless</div>
           </div>
+        </div>
         </div>
         {/* <div style={{ display:'flex',gap:10 }}>
           <Link to="/login"    className="btn btn-outline btn-sm">Sign In</Link>

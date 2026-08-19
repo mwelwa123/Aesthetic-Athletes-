@@ -10,7 +10,7 @@ export default function CartDrawer({ open, onClose }) {
   return (
     <>
       <div onClick={onClose} style={{ position:'fixed',inset:0,background:'rgba(0,0,0,.65)',backdropFilter:'blur(4px)',zIndex:300,animation:'fadeIn .2s ease' }} />
-      <div style={{ position:'fixed',top:0,right:0,bottom:0,width:400,background:'#0a1535',borderLeft:'1px solid rgba(255,255,255,.09)',zIndex:301,display:'flex',flexDirection:'column',animation:'slideInR .3s ease' }}>
+      <div className="cart-drawer" style={{ position:'fixed',top:0,right:0,bottom:0,width:400,background:'#fff',borderLeft:'1px solid rgba(15,23,42,.09)',zIndex:301,display:'flex',flexDirection:'column',animation:'slideInR .3s ease',boxShadow:'-16px 0 40px rgba(15,23,42,.12)' }}>
 
         {/* Header */}
         <div style={{ padding:'20px 24px',borderBottom:'1px solid rgba(255,255,255,.08)',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
@@ -40,7 +40,7 @@ export default function CartDrawer({ open, onClose }) {
                       <p style={{ fontSize:13,color:'var(--cyan)',fontWeight:700,marginBottom:10 }}>K{(item.price*item.qty).toFixed(2)}</p>
                       <div style={{ display:'flex',alignItems:'center',gap:8 }}>
                         {[{icon:<Minus size={12}/>,fn:()=>updateQty(item.id,item.qty-1)},{icon:<Plus size={12}/>,fn:()=>updateQty(item.id,item.qty+1)}].map((b,idx) => (
-                          <button key={idx} onClick={b.fn} style={{ width:26,height:26,borderRadius:6,background:'rgba(255,255,255,.08)',border:'none',color:'white',display:'flex',alignItems:'center',justifyContent:'center' }}>{b.icon}</button>
+                          <button key={idx} onClick={b.fn} style={{ width:26,height:26,borderRadius:6,background:'rgba(255,255,255,.08)',border:'none',color:'var(--text-dark)',display:'flex',alignItems:'center',justifyContent:'center' }}>{b.icon}</button>
                         ))}
                         <span style={{ fontSize:14,fontWeight:600,minWidth:20,textAlign:'center' }}>{item.qty}</span>
                         <button onClick={() => removeFromCart(item.id)} style={{ marginLeft:'auto',background:'rgba(239,68,68,.1)',border:'none',borderRadius:6,padding:'5px 8px',color:'var(--danger)',display:'flex' }}><Trash2 size={13} /></button>

@@ -4,7 +4,7 @@ import { ShoppingCart, LogOut, LayoutDashboard, ClipboardList } from 'lucide-rea
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import CartDrawer from './CartDrawer'
-
+import logo from '../assets/logo.png'
 export default function Navbar() {
   const { user, profile, signOut } = useAuth()
   const { count } = useCart()
@@ -13,20 +13,32 @@ export default function Navbar() {
   const [cartOpen, setCartOpen] = useState(false)
   const isAdmin = profile?.role === 'admin'
 
-  const nl = (to) => ({ textDecoration:'none', fontSize:14, fontWeight:500, color: pathname === to ? 'var(--cyan)' : 'rgba(255,255,255,.58)', transition:'color .2s', padding:'8px 14px' })
+  const nl = (to) => ({ textDecoration:'none', fontSize:14, fontWeight:500, color: pathname === to ? 'var(--cyan)' : 'var(--gray)', transition:'color .2s', padding:'8px 14px' })
 
   return (
     <>
-      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 32px',background:'rgba(6,13,46,.88)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(255,255,255,.07)' }}>
+      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 32px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
 
-        {/* Logo */}
-        <Link to={user ? '/home' : '/'} style={{ display:'flex',alignItems:'center',gap:12,textDecoration:'none' }}>
-          <div style={{ width:38,height:38,borderRadius:9,background:'linear-gradient(135deg,var(--cyan),var(--blue))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Bebas Neue',fontSize:16,color:'white' }}>AA</div>
-          <div style={{ lineHeight:1 }}>
-            <div style={{ fontFamily:'Bebas Neue',fontSize:18,letterSpacing:2,color:'white' }}>Aesthetic Athletes</div>
-            <div style={{ fontSize:9,letterSpacing:3,color:'var(--cyan)',fontWeight:600,textTransform:'uppercase' }}>Fast · Fierce · Fearless</div>
-          </div>
-        </Link>
+        <Link
+  to={user ? '/home' : '/'}
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none'
+  }}
+>
+ <img
+  src={logo}
+  alt="Aesthetic Athletes"
+  style={{
+    width: 200,
+    height: 50,
+    objectFit: 'contain',
+    display: 'block',
+    background: 'transparent'
+  }}
+/>
+</Link>
 
         {/* Links */}
         <div style={{ display:'flex',alignItems:'center',gap:4 }}>
@@ -44,11 +56,11 @@ export default function Navbar() {
 
               {/* User */}
               <div style={{ display:'flex',alignItems:'center',gap:8,marginLeft:10,paddingLeft:12,borderLeft:'1px solid rgba(255,255,255,.09)' }}>
-                <div style={{ width:32,height:32,borderRadius:'50%',background:'linear-gradient(135deg,var(--cyan),var(--blue))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:700 }}>
+                <div style={{ width:32,height:32,borderRadius:'50%',background:'linear-gradient(135deg,var(--cyan),var(--blue))',color:'white',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:700 }}>
                   {profile?.full_name?.[0]?.toUpperCase() || '?'}
                 </div>
-                <span style={{ fontSize:13,color:'rgba(255,255,255,.6)',maxWidth:110,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>{profile?.full_name || user.email}</span>
-                <button onClick={() => { signOut(); navigate('/') }} title="Sign Out" style={{ background:'transparent',border:'none',color:'rgba(255,255,255,.35)',display:'flex',padding:6,borderRadius:6,transition:'color .2s' }}><LogOut size={15} /></button>
+                <span style={{ fontSize:13,color:'var(--gray)',maxWidth:110,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap' }}>{profile?.full_name || user.email}</span>
+                <button onClick={() => { signOut(); navigate('/') }} title="Sign Out" style={{ background:'transparent',border:'none',color:'var(--gray)',display:'flex',padding:6,borderRadius:6,transition:'color .2s' }}><LogOut size={15} /></button>
               </div>
             </>
           ) : (

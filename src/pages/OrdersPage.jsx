@@ -47,7 +47,7 @@ export default function OrdersPage() {
               const isOpen = expanded === order.id
               return (
                 <div key={order.id} className="card" style={{ padding:0,overflow:'hidden' }}>
-                  <button onClick={()=>setExpanded(isOpen?null:order.id)} style={{ width:'100%',background:'none',border:'none',cursor:'pointer',color:'white',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'20px 24px',gap:16 }}>
+                  <button onClick={()=>setExpanded(isOpen?null:order.id)} style={{ width:'100%',background:'none',border:'none',cursor:'pointer',color:'var(--text-dark)',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'20px 24px',gap:16 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:24,flex:1,flexWrap:'wrap' }}>
                       <div>
                         <p style={{ fontSize:10,color:'rgba(255,255,255,.38)',fontWeight:700,letterSpacing:1.5,textTransform:'uppercase',marginBottom:3 }}>Order ID</p>

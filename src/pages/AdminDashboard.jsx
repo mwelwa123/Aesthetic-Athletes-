@@ -48,7 +48,7 @@ export default function AdminDashboard() {
   async function updateStatus(id, status) {
     const { error } = await supabase.from('orders').update({ status }).eq('id', id)
     if (error) toast.error(error.message)
-    else { toast.success(`Marked as ${status}`); loadOrders() }
+    else { toast.success(status==='confirmed' ? 'Payment confirmed; order is now confirmed' : `Marked as ${status}`); loadOrders() }
   }
   async function toggleActive(p) {
     await supabase.from('products').update({ active:!p.active }).eq('id',p.id)
@@ -249,7 +249,7 @@ function OrdersTable({ orders, onUpdate, expanded, setExpanded, admin }) {
                   <td><span className={`badge ${cfg.cls}`}>{cfg.label}</span></td>
                   <td>
                     <div style={{ display:'flex',gap:7,flexWrap:'wrap' }}>
-                      {admin&&cfg.next&&<button className="btn btn-success btn-sm" onClick={()=>onUpdate(order.id,cfg.next)}><Check size={11}/>{cfg.nl}</button>}
+                      {admin&&cfg.next&&<button className="btn btn-success btn-sm" onClick={()=>onUpdate(order.id,cfg.next)}><Check size={11}/>{order.status==='pending'&&order.payment_method==='airtel_money'?'Confirm Payment':cfg.nl}</button>}
                       {admin&&order.status==='pending'&&<button className="btn btn-danger btn-sm" style={{ marginLeft:4 }} onClick={()=>onUpdate(order.id,'cancelled')}>Cancel</button>}
                     </div>
                   </td>
@@ -267,6 +267,11 @@ function OrdersTable({ orders, onUpdate, expanded, setExpanded, admin }) {
                             <span style={{ fontSize:13,fontWeight:700,color:'var(--cyan)' }}>K{(item.quantity*item.unit_price).toFixed(2)}</span>
                           </div>
                         ))}
+                        {order.payment_method==='airtel_money'&&<div style={{ fontSize:12,color:'var(--gray)',marginTop:4 }}>
+                          <strong style={{ color:'var(--text-dark)' }}>Airtel Money payment</strong>
+                          {order.payment_phone&&<> · {order.payment_phone}</>}
+                          {order.payment_reference&&<> · Transaction ID: <strong style={{ color:'var(--text-dark)' }}>{order.payment_reference}</strong></>}
+                        </div>}
                         {order.delivery_address&&<p style={{ fontSize:12,color:'rgba(255,255,255,.34)',marginTop:6,paddingTop:9,borderTop:'1px solid rgba(255,255,255,.06)' }}>📍 {order.delivery_address}{order.city?`, ${order.city}`:''}</p>}
                         {order.notes&&<p style={{ fontSize:12,color:'rgba(255,255,255,.34)' }}>📝 {order.notes}</p>}
                       </div>

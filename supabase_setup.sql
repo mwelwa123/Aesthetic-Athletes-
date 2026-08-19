@@ -67,8 +67,15 @@ create table if not exists public.orders (
   delivery_address text,
   city             text,
   notes            text,
+  payment_method   text,
+  payment_phone    text,
+  payment_reference text,
   created_at       timestamptz default now()
 );
+-- Makes the payment fields available in existing projects too.
+alter table public.orders add column if not exists payment_method text;
+alter table public.orders add column if not exists payment_phone text;
+alter table public.orders add column if not exists payment_reference text;
 alter table public.orders enable row level security;
 drop policy if exists "Users see own orders"    on public.orders;
 drop policy if exists "Users create orders"     on public.orders;

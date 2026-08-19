@@ -6,6 +6,9 @@ import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 
+const AIRTEL_MONEY_NUMBER = import.meta.env.VITE_AIRTEL_MONEY_NUMBER || '+26096946536'
+const AIRTEL_MONEY_NAME = import.meta.env.VITE_AIRTEL_MONEY_NAME || 'Mapalo Chileshe'
+
 export default function CheckoutPage() {
   const { user, profile } = useAuth()
   const { cart, total, clearCart } = useCart()
@@ -13,7 +16,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [done, setDone]       = useState(false)
   const [orderId, setOrderId] = useState(null)
-  const [form, setForm] = useState({ address:'', city:'', phone: profile?.phone||'', notes:'' })
+  const [form, setForm] = useState({ address:'', city:'', phone: profile?.phone||'', paymentReference:'', notes:'' })
 
   if (cart.length === 0 && !done) return (
     <div className="page"><div className="bg-mesh"/><div className="bg-lines"/>
@@ -30,11 +33,22 @@ export default function CheckoutPage() {
 
   const submit = async (e) => {
     e.preventDefault()
-    if (!form.address.trim() || !form.city.trim()) return toast.error('Please enter delivery address')
+    if (!form.address.trim() || !form.city.trim() || !form.phone.trim()) return toast.error('Please complete your delivery details')
+    if (!form.paymentReference.trim()) return toast.error('Enter your Airtel Money transaction ID')
     setLoading(true)
     try {
       const { data: order, error: oErr } = await supabase.from('orders')
-        .insert({ user_id:user.id, status:'pending', total, delivery_address:form.address, city:form.city, notes:form.notes })
+        .insert({
+          user_id:user.id,
+          status:'pending',
+          total,
+          delivery_address:form.address,
+          city:form.city,
+          notes:form.notes,
+          payment_method:'airtel_money',
+          payment_phone:form.phone.trim(),
+          payment_reference:form.paymentReference.trim(),
+        })
         .select().single()
       if (oErr) throw oErr
       const items = cart.map(i => ({ order_id:order.id, product_id:i.id, quantity:i.qty, unit_price:i.price }))
@@ -91,6 +105,15 @@ export default function CheckoutPage() {
               <div className="fgroup">
                 <label className="flabel">Order Notes</label>
                 <textarea className="finput" placeholder="Any special instructions…" value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} />
+              </div>
+              <div style={{ background:'rgba(0,180,216,.08)',border:'1px solid rgba(0,180,216,.22)',borderRadius:12,padding:18,margin:'24px 0 18px' }}>
+                <h2 style={{ fontSize:22,letterSpacing:1.5,marginBottom:6 }}>AIRTEL MONEY PAYMENT</h2>
+                <p style={{ fontSize:14,color:'var(--gray)',lineHeight:1.6,marginBottom:12 }}>
+                  Send <strong style={{ color:'var(--text-dark)' }}>K{total.toFixed(2)}</strong> to <strong style={{ color:'var(--text-dark)' }}>{AIRTEL_MONEY_NAME} · {AIRTEL_MONEY_NUMBER}</strong>, then enter the transaction ID below.
+                </p>
+                <label className="flabel">Airtel Money Transaction ID *</label>
+                <input className="finput" placeholder="e.g. MP240123.1234.A12345" value={form.paymentReference} onChange={e=>setForm(p=>({...p,paymentReference:e.target.value}))} />
+                <p style={{ fontSize:12,color:'var(--gray)',marginTop:8 }}>Your order stays pending until an admin verifies this payment.</p>
               </div>
               <button type="submit" className="btn btn-primary btn-full" style={{ padding:14,fontSize:15,marginTop:6 }} disabled={loading}>
                 {loading ? 'Placing Order…' : `Place Order · K${total.toFixed(2)}`}
