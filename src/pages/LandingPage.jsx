@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Zap, BarChart2, Trophy, Users, CheckCircle } from 'lucide-react'
 import logo from '../assets/logo.png'
+import landingHero from '../assets/landing-hero.png'
 
 export default function LandingPage() {
   return (
@@ -36,8 +37,8 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section style={{ position:'relative',zIndex:1,minHeight:'100vh',display:'flex',alignItems:'center',padding:'80px 48px 60px' }}>
-        <div style={{ maxWidth:1200,margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center',width:'100%' }}>
+      <section style={{ position:'relative',zIndex:1,minHeight:'100vh',display:'flex',alignItems:'center',padding:'80px 48px 60px',backgroundImage:`linear-gradient(90deg,rgba(3,13,34,.9) 0%,rgba(3,13,34,.62) 50%,rgba(3,13,34,.5) 100%), url(${landingHero})`,backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat' }}>
+        <div style={{ position:'relative',zIndex:1,maxWidth:1200,margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center',width:'100%' }}>
           <div className="afu">
             <div style={{ display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',borderRadius:100,border:'1px solid rgba(0,180,216,.4)',background:'rgba(0,180,216,.08)',fontSize:11,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'var(--cyan)',marginBottom:28 }}>
               <span style={{ width:6,height:6,borderRadius:'50%',background:'var(--cyan)',animation:'blink 1.4s infinite' }} />
