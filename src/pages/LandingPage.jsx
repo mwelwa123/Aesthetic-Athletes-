@@ -41,7 +41,7 @@ export default function LandingPage() {
           <div className="afu">
             <div style={{ display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',borderRadius:100,border:'1px solid rgba(0,180,216,.4)',background:'rgba(0,180,216,.08)',fontSize:11,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'var(--cyan)',marginBottom:28 }}>
               <span style={{ width:6,height:6,borderRadius:'50%',background:'var(--cyan)',animation:'blink 1.4s infinite' }} />
-              New Collection 2026
+              New Season, New Collection
             </div>
             <style>{`@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}`}</style>
             <h1 style={{ fontSize:'clamp(60px,7.5vw,96px)',lineHeight:.94,marginBottom:22 }}>

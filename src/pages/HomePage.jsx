@@ -52,7 +52,7 @@ export default function HomePage() {
             Welcome back, {profile?.full_name?.split(' ')[0] || 'Athlete'} 👊
           </p>
           <h1 style={{ fontSize:46,letterSpacing:2 }}>SHOP THE COLLECTION</h1>
-          <p style={{ color:'rgba(255,255,255,.46)',marginTop:4,fontSize:14 }}>{products.length} products available · New Collection 2026</p>
+          <p style={{ color:'rgba(255,255,255,.46)',marginTop:4,fontSize:14 }}>{products.length} products available · New Season, New Collection</p>
         </div>
       </div>
 
