@@ -239,8 +239,7 @@ function OrdersTable({ orders, onUpdate, expanded, setExpanded, admin }) {
                 <tr key={order.id}>
                   <td>
                     <span style={{ fontFamily:'Space Mono',fontSize:12,color:'var(--cyan)' }}>#{order.id.slice(0,8).toUpperCase()}</span>
-                    <button onClick={()=>setExpanded(open?null:order.id)} style={{ display:'block',marginTop:3,background:'none',border:'none',cursor:'pointer',color:'rgba(255,255,255,.32)',fontSize:11,padding:0,display:'flex',alignItems:'center',gap:3 }}>
-                      {open?<><ChevronUp size={10}/>hide</>:<><ChevronDown size={10}/>items</>}
+<button onClick={()=>setExpanded(open?null:order.id)} style={{ marginTop:3,background:'none',border:'none',cursor:'pointer',color:'rgba(255,255,255,.32)',fontSize:11,padding:0,display:'flex',alignItems:'center',gap:3 }}>                      {open?<><ChevronUp size={10}/>hide</>:<><ChevronDown size={10}/>items</>}
                     </button>
                   </td>
                   {admin&&<td><p style={{ fontSize:13,fontWeight:600 }}>{order.profiles?.full_name||'—'}</p><p style={{ fontSize:11,color:'rgba(255,255,255,.34)' }}>{order.profiles?.email}</p></td>}
