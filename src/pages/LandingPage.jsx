@@ -19,7 +19,7 @@ export default function LandingPage() {
       </svg>
 
       {/* Nav */}
-      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 48px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
+      <nav className="landing-nav" style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 48px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
         <div style={{ display:'flex',alignItems:'center',gap:12 }}>
           <img src={logo} alt="Aesthetic Athletes" style={{ width:178,height:54,objectFit:'contain',display:'block' }} />
           <div style={{ display:'none' }}>
@@ -37,26 +37,26 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section style={{ position:'relative',zIndex:1,minHeight:'100vh',display:'flex',alignItems:'center',padding:'80px 48px 60px',backgroundImage:`linear-gradient(90deg,rgba(3,13,34,.9) 0%,rgba(3,13,34,.62) 50%,rgba(3,13,34,.5) 100%), url(${landingHero})`,backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat' }}>
-        <div style={{ position:'relative',zIndex:1,maxWidth:1200,margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center',width:'100%' }}>
-          <div className="afu">
-            <div style={{ display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',borderRadius:100,border:'1px solid rgba(0,180,216,.4)',background:'rgba(0,180,216,.08)',fontSize:11,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'var(--cyan)',marginBottom:28 }}>
+      <section className="landing-hero" style={{ position:'relative',zIndex:1,minHeight:'100vh',display:'flex',alignItems:'center',padding:'80px 48px 60px',backgroundImage:`linear-gradient(90deg,rgba(3,13,34,.9) 0%,rgba(3,13,34,.62) 50%,rgba(3,13,34,.5) 100%), url(${landingHero})`,backgroundPosition:'center',backgroundSize:'cover',backgroundRepeat:'no-repeat' }}>
+        <div className="landing-hero-grid" style={{ position:'relative',zIndex:1,maxWidth:1200,margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center',width:'100%' }}>
+          <div className="landing-hero-content afu">
+            <div className="hero-eyebrow" style={{ display:'inline-flex',alignItems:'center',gap:8,padding:'6px 14px',borderRadius:100,border:'1px solid rgba(0,180,216,.4)',background:'rgba(0,180,216,.08)',fontSize:11,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'var(--cyan)',marginBottom:28 }}>
               <span style={{ width:6,height:6,borderRadius:'50%',background:'var(--cyan)',animation:'blink 1.4s infinite' }} />
               New Season, New Collection
             </div>
             <style>{`@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}`}</style>
-            <h1 style={{ fontSize:'clamp(60px,7.5vw,96px)',lineHeight:.94,marginBottom:22 }}>
+            <h1 className="hero-title" style={{ fontSize:'clamp(60px,7.5vw,96px)',lineHeight:.94,marginBottom:22 }}>
               TRAIN<br/>LIKE A<br/>
               <span style={{ background:'linear-gradient(90deg,var(--cyan),var(--cyan-l))',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text' }}>CHAMPION</span>
             </h1>
-            <p style={{ fontSize:17,lineHeight:1.7,color:'rgba(255,255,255,.58)',maxWidth:440,marginBottom:36,fontWeight:300 }}>
+            <p className="hero-description" style={{ fontSize:17,lineHeight:1.7,color:'rgba(255,255,255,.58)',maxWidth:440,marginBottom:36,fontWeight:300 }}>
               Premium sports equipment and athletic gear for champions. Quality products designed to help you achieve your goals.
             </p>
-            <div style={{ display:'flex',gap:14,flexWrap:'wrap' }}>
+            <div className="hero-actions" style={{ display:'flex',gap:14,flexWrap:'wrap' }}>
               <Link to="/register" className="btn btn-primary" style={{ fontSize:15,padding:'13px 30px' }}>Start Your Journey <ArrowRight size={16} /></Link>
               <Link to="/login"    className="btn btn-outline" style={{ fontSize:15,padding:'13px 26px' }}>Sign In</Link>
             </div>
-            <div style={{ display:'flex',gap:40,marginTop:48,paddingTop:32,borderTop:'1px solid rgba(255,255,255,.08)' }}>
+            <div className="hero-stats" style={{ display:'flex',gap:40,marginTop:48,paddingTop:32,borderTop:'1px solid rgba(255,255,255,.08)' }}>
               {[['12K+','Athletes'],['340+','Products'],['98%','Satisfied']].map(([n,l]) => (
                 <div key={l}>
                   <div style={{ fontFamily:'Bebas Neue',fontSize:34,color:'var(--cyan)',letterSpacing:1 }}>{n}</div>
@@ -67,8 +67,8 @@ export default function LandingPage() {
           </div>
 
           {/* Auth card */}
-          <div className="afu" style={{ animationDelay:'.12s' }}>
-            <div className="card" style={{ position:'relative',overflow:'hidden' }}>
+          <div className="landing-auth afu" style={{ animationDelay:'.12s' }}>
+            <div className="landing-auth-card card" style={{ position:'relative',overflow:'hidden' }}>
               <div style={{ position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(90deg,var(--cyan),var(--blue),var(--cyan))',backgroundSize:'200%',animation:'shimmer 2.5s linear infinite' }} />
               <h2 style={{ fontSize:32,marginBottom:8,letterSpacing:2 }}>Join the Squad</h2>
               <p style={{ color:'rgba(255,255,255,.48)',fontSize:14,marginBottom:26 }}>Create your free account and start training.</p>
@@ -88,9 +88,9 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section style={{ position:'relative',zIndex:1,padding:'60px 48px' }}>
+      <section className="landing-features" style={{ position:'relative',zIndex:1,padding:'60px 48px' }}>
         <div style={{ maxWidth:1200,margin:'0 auto' }}>
-          <h2 style={{ textAlign:'center',fontSize:46,marginBottom:10,letterSpacing:2 }}>WHY AESTHETIC ATHLETES?</h2>
+          <h2 className="landing-section-title" style={{ textAlign:'center',fontSize:46,marginBottom:10,letterSpacing:2 }}>WHY AESTHETIC ATHLETES?</h2>
           <p style={{ textAlign:'center',color:'rgba(255,255,255,.45)',marginBottom:44,fontSize:16 }}>Everything you need to dominate your sport</p>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:20 }}>
             {[
@@ -110,9 +110,9 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ position:'relative',zIndex:1,padding:'70px 48px',background:'linear-gradient(135deg,rgba(0,180,216,.07),rgba(21,101,192,.11))',borderTop:'1px solid rgba(255,255,255,.05)' }}>
+      <section className="landing-cta" style={{ position:'relative',zIndex:1,padding:'70px 48px',background:'linear-gradient(135deg,rgba(0,180,216,.07),rgba(21,101,192,.11))',borderTop:'1px solid rgba(255,255,255,.05)' }}>
         <div style={{ textAlign:'center' }}>
-          <h2 style={{ fontSize:54,marginBottom:14,letterSpacing:2 }}>READY TO ELEVATE?</h2>
+          <h2 className="landing-cta-title" style={{ fontSize:54,marginBottom:14,letterSpacing:2 }}>READY TO ELEVATE?</h2>
           <p style={{ color:'rgba(255,255,255,.5)',fontSize:16,maxWidth:460,margin:'0 auto 34px' }}>Join thousands of athletes who trust Aesthetic Athletes.</p>
           <Link to="/register" className="btn btn-primary" style={{ fontSize:16,padding:'15px 40px' }}>Start Your Journey <ArrowRight size={17} /></Link>
         </div>
