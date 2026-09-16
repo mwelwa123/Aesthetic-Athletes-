@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mail, ArrowLeft, CheckCircle } from 'lucide-react'
+import { Mail, CheckCircle } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
+import logo from '../assets/logo.png'
+import loginAthletes from '../assets/login-athletes.png'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -19,45 +21,42 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div style={{ minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:24 }}>
-      <div className="bg-mesh"/><div className="bg-lines"/>
-      <div style={{ position:'relative',zIndex:1,width:'100%',maxWidth:420 }}>
-        <div style={{ textAlign:'center',marginBottom:30 }}>
-          <Link to="/" style={{ display:'inline-flex',alignItems:'center',gap:12,textDecoration:'none' }}>
-            <div style={{ width:42,height:42,borderRadius:10,background:'linear-gradient(135deg,var(--cyan),var(--blue))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Bebas Neue',fontSize:17,color:'white' }}>AA</div>
-            <span style={{ fontFamily:'Bebas Neue',fontSize:21,letterSpacing:2 }}>Aesthetic Athletes</span>
-          </Link>
+    <div className="login-page reset-request-page" style={{ backgroundImage:`linear-gradient(rgba(239,249,255,.10), rgba(239,249,255,.10)), url(${loginAthletes})` }}>
+      <div className="login-shell">
+        <div className="login-brand">
+          <Link to="/" aria-label="Aesthetic Athletes home"><img src={logo} alt="Aesthetic Athletes" /></Link>
         </div>
-        <div className="card afu" style={{ position:'relative' }}>
-          <div style={{ position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(90deg,var(--cyan),var(--blue))',borderRadius:'16px 16px 0 0' }} />
+        <div className="login-card card afu">
           {!sent ? (
             <>
-              <h1 style={{ fontSize:32,letterSpacing:2,marginBottom:6 }}>Reset Password</h1>
-              <p style={{ color:'rgba(255,255,255,.46)',fontSize:14,marginBottom:24 }}>Enter your email and we'll send a reset link.</p>
+              <h1>Reset Password</h1>
+              <p className="login-intro">Enter your email address and we'll send you a link to reset your password.</p>
               <form onSubmit={submit}>
                 <div className="fgroup">
                   <label className="flabel">Email Address</label>
-                  <input className="finput" type="email" placeholder="you@example.com" value={email} onChange={e=>setEmail(e.target.value)} />
+                  <div className="login-input-wrap">
+                    <Mail size={19} aria-hidden="true" />
+                    <input className="finput" type="email" placeholder="you@example.com" value={email} onChange={e=>setEmail(e.target.value)} />
+                  </div>
                 </div>
-                <button type="submit" className="btn btn-primary btn-full" style={{ padding:14,fontSize:15 }} disabled={loading}>
-                  {loading?'Sending…':<><Mail size={16}/>Send Reset Link</>}
+                <button type="submit" className="btn btn-primary btn-full login-submit" disabled={loading}>
+                  {loading?'Sending…':<><Mail size={19}/>Send Reset Link</>}
                 </button>
               </form>
-              <div style={{ marginTop:22,textAlign:'center' }}>
-                <Link to="/login" style={{ color:'var(--cyan)',fontSize:14,display:'inline-flex',alignItems:'center',gap:6 }}><ArrowLeft size={13}/>Back to Sign In</Link>
-              </div>
+              <p className="login-register">Remember your password? <Link to="/login" style={{ color:'var(--cyan)',fontWeight:700 }}>Sign In</Link></p>
             </>
           ) : (
-            <div style={{ textAlign:'center' }}>
-              <div style={{ width:68,height:68,borderRadius:'50%',background:'rgba(16,185,129,.1)',border:'2px solid rgba(16,185,129,.3)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}><CheckCircle size={34} color="var(--success)"/></div>
-              <h2 style={{ fontSize:30,letterSpacing:2,marginBottom:10 }}>Check Your Email</h2>
-              <p style={{ color:'rgba(255,255,255,.55)',marginBottom:6 }}>Reset link sent to:</p>
-              <p style={{ color:'var(--cyan)',fontWeight:700,marginBottom:24 }}>{email}</p>
+            <div className="reset-success">
+              <div className="reset-success-icon"><CheckCircle size={34} color="var(--success)"/></div>
+              <h2>Check Your Email</h2>
+              <p>Reset link sent to:</p>
+              <p className="reset-success-email">{email}</p>
               <Link to="/login" className="btn btn-primary btn-full">Back to Sign In</Link>
             </div>
           )}
         </div>
       </div>
+      <p className="login-tagline" aria-hidden="true">Fast<br/>Fierce<br/>Fearless</p>
     </div>
   )
 }

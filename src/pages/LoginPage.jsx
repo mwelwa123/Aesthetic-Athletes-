@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Eye, EyeOff, LogIn } from 'lucide-react'
+import { Eye, EyeOff, LogIn, LockKeyhole, Mail } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
+import logo from '../assets/logo.png'
+import loginAthletes from '../assets/login-athletes.png'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -31,52 +33,51 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:24 }}>
-      <div className="bg-mesh" /><div className="bg-lines" />
-      <div style={{ position:'relative',zIndex:1,width:'100%',maxWidth:440 }}>
-        <div style={{ textAlign:'center',marginBottom:32 }}>
-          <Link to="/" style={{ display:'inline-flex',alignItems:'center',gap:12,textDecoration:'none' }}>
-            <div style={{ width:42,height:42,borderRadius:10,background:'linear-gradient(135deg,var(--cyan),var(--blue))',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Bebas Neue',fontSize:17,color:'white' }}>AA</div>
-            <span style={{ fontFamily:'Bebas Neue',fontSize:21,letterSpacing:2 }}>Aesthetic Athletes</span>
-          </Link>
+    <div className="login-page" style={{ backgroundImage:`linear-gradient(rgba(239,249,255,.10), rgba(239,249,255,.10)), url(${loginAthletes})` }}>
+      <div className="login-shell">
+        <div className="login-brand">
+          <Link to="/" aria-label="Aesthetic Athletes home"><img src={logo} alt="Aesthetic Athletes" /></Link>
         </div>
-        <div className="card afu" style={{ position:'relative' }}>
-          <div style={{ position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(90deg,var(--cyan),var(--blue))',borderRadius:'16px 16px 0 0' }} />
-          <h1 style={{ fontSize:34,letterSpacing:2,marginBottom:6 }}>Welcome Back</h1>
-          <p style={{ color:'rgba(255,255,255,.46)',fontSize:14,marginBottom:26 }}>Sign in to your account to continue</p>
+        <div className="login-card card afu">
+          <h1>Welcome Back, Athlete</h1>
+          <p className="login-intro">Sign in to access your orders, profile and the latest collections.</p>
 
           <form onSubmit={submit}>
             <div className="fgroup">
               <label className="flabel">Email Address</label>
-              <input className={`finput${errors.email?' err':''}`} type="email" placeholder="you@example.com"
-                value={form.email} onChange={e => setForm(p => ({...p,email:e.target.value}))} />
+              <div className="login-input-wrap">
+                <Mail size={19} aria-hidden="true" />
+                <input className={`finput${errors.email?' err':''}`} type="email" placeholder="you@example.com"
+                  value={form.email} onChange={e => setForm(p => ({...p,email:e.target.value}))} />
+              </div>
               {errors.email && <p className="ferr">{errors.email}</p>}
             </div>
             <div className="fgroup">
               <label className="flabel">Password</label>
-              <div style={{ position:'relative' }}>
+              <div className="login-input-wrap login-password-wrap">
+                <LockKeyhole size={19} aria-hidden="true" />
                 <input className={`finput${errors.password?' err':''}`} type={showPw?'text':'password'} placeholder="••••••••"
-                  value={form.password} onChange={e => setForm(p => ({...p,password:e.target.value}))} style={{ paddingRight:44 }} />
-                <button type="button" onClick={() => setShowPw(!showPw)} style={{ position:'absolute',right:14,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',color:'rgba(255,255,255,.35)' }}>
-                  {showPw ? <EyeOff size={16}/> : <Eye size={16}/>}
+                  value={form.password} onChange={e => setForm(p => ({...p,password:e.target.value}))} />
+                <button type="button" onClick={() => setShowPw(!showPw)} aria-label={showPw ? 'Hide password' : 'Show password'}>
+                  {showPw ? <EyeOff size={18}/> : <Eye size={18}/>}
                 </button>
               </div>
               {errors.password && <p className="ferr">{errors.password}</p>}
             </div>
-            <div style={{ textAlign:'right',marginBottom:22 }}>
-              <Link to="/forgot-password" style={{ fontSize:13,color:'var(--cyan)' }}>Forgot password?</Link>
+            <div className="login-forgot">
+              <Link to="/forgot-password">Forgot password?</Link>
             </div>
-            <button type="submit" className="btn btn-primary btn-full" disabled={loading} style={{ padding:14,fontSize:15 }}>
-              {loading ? <><div className="spin spin-sm"/>&nbsp;Signing in…</> : <><LogIn size={16}/>Sign In</>}
+            <button type="submit" className="btn btn-primary btn-full login-submit" disabled={loading}>
+              {loading ? <><div className="spin spin-sm"/>&nbsp;Signing in…</> : <><LogIn size={19}/>Sign In</>}
             </button>
           </form>
 
-          <div className="divider">or</div>
-          <p style={{ textAlign:'center',fontSize:14,color:'rgba(255,255,255,.46)' }}>
+          <p className="login-register">
             Don't have an account? <Link to="/register" style={{ color:'var(--cyan)',fontWeight:700 }}>Create one free</Link>
           </p>
         </div>
       </div>
+      <p className="login-tagline" aria-hidden="true">Fast<br/>Fierce<br/>Fearless</p>
     </div>
   )
 }
