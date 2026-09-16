@@ -56,16 +56,16 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="wrap" style={{ position:'relative',zIndex:1,padding:'28px 24px' }}>
+      <div className="wrap shop-content" style={{ position:'relative',zIndex:1,padding:'28px 24px' }}>
         {/* Search + filters */}
-        <div style={{ display:'flex',gap:14,marginBottom:28,flexWrap:'wrap',alignItems:'center' }}>
-          <div style={{ position:'relative',flex:1,minWidth:200 }}>
+        <div className="shop-toolbar" style={{ display:'flex',gap:14,marginBottom:28,flexWrap:'wrap',alignItems:'center' }}>
+          <div className="shop-search" style={{ position:'relative',flex:1,minWidth:200 }}>
             <Search size={15} style={{ position:'absolute',left:14,top:'50%',transform:'translateY(-50%)',color:'rgba(255,255,255,.28)' }}/>
             <input className="finput" placeholder="Search products…" value={search} onChange={e=>setSearch(e.target.value)} style={{ paddingLeft:42 }} />
           </div>
-          <div style={{ display:'flex',gap:8,flexWrap:'wrap' }}>
+          <div className="category-filters" style={{ display:'flex',gap:8,flexWrap:'wrap' }}>
             {CATS.map(c => (
-              <button key={c} onClick={()=>setCat(c)} style={{
+              <button key={c} onClick={()=>setCat(c)} className="category-filter" style={{
                 padding:'9px 18px',borderRadius:8,border:'none',cursor:'pointer',fontSize:13,fontWeight:600,transition:'all .2s',
                 background: cat===c ? 'linear-gradient(135deg,var(--cyan),var(--blue))' : 'rgba(255,255,255,.06)',
                 color: cat===c ? 'white' : 'rgba(255,255,255,.55)',
@@ -96,12 +96,12 @@ export default function HomePage() {
 
 function ProductCard({ product: p, onAdd, adding, delay }) {
   return (
-    <div className="afu" style={{ animationDelay:`${delay}s`, background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)', borderRadius:16, overflow:'hidden', transition:'transform .2s,box-shadow .2s' }}
+    <div className="product-card afu" style={{ animationDelay:`${delay}s`, background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)', borderRadius:16, overflow:'hidden', transition:'transform .2s,box-shadow .2s' }}
       onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow='0 16px 40px rgba(0,0,0,.32)'}}
       onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='none'}}>
 
       {/* Image */}
-      <div style={{ position:'relative',paddingBottom:'64%',background:'rgba(0,0,0,.28)',overflow:'hidden' }}>
+      <div className="product-card-media" style={{ position:'relative',paddingBottom:'64%',background:'rgba(0,0,0,.28)',overflow:'hidden' }}>
         <img src={p.image_url} alt={p.name} style={{ position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',transition:'transform .35s' }}
           onError={e=>e.target.src=`https://placehold.co/400x260/0d1b4b/00b4d8?text=${encodeURIComponent(p.name)}`}
           onMouseEnter={e=>e.target.style.transform='scale(1.06)'}
@@ -120,10 +120,10 @@ function ProductCard({ product: p, onAdd, adding, delay }) {
       </div>
 
       {/* Info */}
-      <div style={{ padding:'17px 18px 20px' }}>
-        <h3 style={{ fontSize:15,fontWeight:700,marginBottom:5,lineHeight:1.3 }}>{p.name}</h3>
-        <p style={{ fontSize:13,color:'rgba(255,255,255,.46)',lineHeight:1.5,marginBottom:15,display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden' }}>{p.description}</p>
-        <div style={{ display:'flex',alignItems:'center',justifyContent:'space-between' }}>
+      <div className="product-card-info" style={{ padding:'17px 18px 20px' }}>
+        <h3 className="product-card-title" style={{ fontSize:15,fontWeight:700,marginBottom:5,lineHeight:1.3 }}>{p.name}</h3>
+        <p className="product-card-description" style={{ fontSize:13,color:'rgba(255,255,255,.46)',lineHeight:1.5,marginBottom:15,display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden' }}>{p.description}</p>
+        <div className="product-card-actions" style={{ display:'flex',alignItems:'center',justifyContent:'space-between' }}>
           <div>
             <span style={{ fontFamily:'Bebas Neue',fontSize:26,color:'var(--cyan)',letterSpacing:1 }}>K{parseFloat(p.price).toFixed(2)}</span>
             {p.stock > 0 && <p style={{ fontSize:11,color:'rgba(255,255,255,.3)',marginTop:1 }}>{p.stock} in stock</p>}

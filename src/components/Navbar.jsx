@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { ShoppingCart, LogOut, LayoutDashboard, ClipboardList } from 'lucide-react'
+import { ShoppingCart, LogOut, LayoutDashboard, ClipboardList, Menu, X, Bell } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import CartDrawer from './CartDrawer'
@@ -11,16 +11,18 @@ export default function Navbar() {
   const navigate  = useNavigate()
   const { pathname } = useLocation()
   const [cartOpen, setCartOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const isAdmin = profile?.role === 'admin'
 
   const nl = (to) => ({ textDecoration:'none', fontSize:14, fontWeight:500, color: pathname === to ? 'var(--cyan)' : 'var(--gray)', transition:'color .2s', padding:'8px 14px' })
 
   return (
     <>
-      <nav style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 32px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
+      <nav className="main-nav" style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,height:64,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 32px',background:'rgba(255,255,255,.92)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(15,23,42,.08)',boxShadow:'0 4px 20px rgba(15,23,42,.05)' }}>
 
         <Link
   to={user ? '/home' : '/'}
+  className="nav-brand"
   style={{
     display: 'flex',
     alignItems: 'center',
@@ -41,7 +43,7 @@ export default function Navbar() {
 </Link>
 
         {/* Links */}
-        <div style={{ display:'flex',alignItems:'center',gap:4 }}>
+        <div className="nav-desktop-links" style={{ display:'flex',alignItems:'center',gap:4 }}>
           {user ? (
             <>
               <Link to="/home"   style={nl('/home')}>Shop</Link>
@@ -49,7 +51,7 @@ export default function Navbar() {
               {isAdmin && <Link to="/admin" style={{ ...nl('/admin'), display:'flex', alignItems:'center', gap:6 }}><LayoutDashboard size={14} />Admin</Link>}
 
               {/* Cart */}
-              <button onClick={() => setCartOpen(true)} style={{ position:'relative',background:'rgba(0,180,216,.1)',border:'1px solid rgba(0,180,216,.25)',borderRadius:8,padding:'8px 13px',color:'var(--cyan)',display:'flex',alignItems:'center',gap:6,fontSize:14,marginLeft:6 }}>
+              <button onClick={() => setCartOpen(true)} className="nav-cart-button" aria-label="Open cart" style={{ position:'relative',background:'rgba(0,180,216,.1)',border:'1px solid rgba(0,180,216,.25)',borderRadius:8,padding:'8px 13px',color:'var(--cyan)',display:'flex',alignItems:'center',gap:6,fontSize:14,marginLeft:6 }}>
                 <ShoppingCart size={16} />
                 {count > 0 && <span style={{ position:'absolute',top:-6,right:-6,background:'linear-gradient(135deg,var(--cyan),var(--blue))',color:'white',borderRadius:'50%',width:18,height:18,display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,fontWeight:700 }}>{count}</span>}
               </button>
@@ -70,7 +72,32 @@ export default function Navbar() {
             </>
           )}
         </div>
+
+        {user && (
+          <div className="nav-mobile-actions">
+            <span className="nav-notification" aria-label="Notifications"><Bell size={18} /></span>
+            <button onClick={() => setCartOpen(true)} className="nav-cart-button" aria-label="Open cart">
+              <ShoppingCart size={18} />
+              {count > 0 && <span className="nav-cart-count">{count}</span>}
+            </button>
+            <button onClick={() => setMenuOpen(open => !open)} className="nav-menu-button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>
+              {menuOpen ? <X size={21}/> : <Menu size={22}/>}
+            </button>
+          </div>
+        )}
       </nav>
+      {user && menuOpen && (
+        <div className="nav-mobile-menu">
+          <div className="nav-mobile-profile">
+            <div>{profile?.full_name?.[0]?.toUpperCase() || '?'}</div>
+            <span>{profile?.full_name || user.email}</span>
+          </div>
+          <Link to="/home" onClick={() => setMenuOpen(false)}>Shop</Link>
+          <Link to="/orders" onClick={() => setMenuOpen(false)}>My Orders</Link>
+          {isAdmin && <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>}
+          <button onClick={() => { setMenuOpen(false); signOut(); navigate('/') }}><LogOut size={16}/>Sign Out</button>
+        </div>
+      )}
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   )

@@ -82,7 +82,7 @@ export default function CheckoutPage() {
     <div className="page"><div className="bg-mesh"/><div className="bg-lines"/>
       <div className="wrap" style={{ position:'relative',zIndex:1,padding:'36px 24px' }}>
         <h1 style={{ fontSize:46,letterSpacing:2,marginBottom:28 }}>CHECKOUT</h1>
-        <div style={{ display:'grid',gridTemplateColumns:'1fr 370px',gap:28,alignItems:'start' }}>
+        <div className="checkout-layout" style={{ display:'grid',gridTemplateColumns:'1fr 370px',gap:28,alignItems:'start' }}>
 
           {/* Form */}
           <div className="card">
@@ -92,7 +92,7 @@ export default function CheckoutPage() {
                 <label className="flabel">Street Address *</label>
                 <input className="finput" placeholder="123 Cairo Road" value={form.address} onChange={e=>setForm(p=>({...p,address:e.target.value}))} />
               </div>
-              <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:16 }}>
+              <div className="checkout-fields" style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:16 }}>
                 <div className="fgroup">
                   <label className="flabel">City *</label>
                   <input className="finput" placeholder="Lusaka" value={form.city} onChange={e=>setForm(p=>({...p,city:e.target.value}))} />
@@ -122,7 +122,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Summary */}
-          <div className="card" style={{ position:'sticky',top:80 }}>
+          <div className="card checkout-summary" style={{ position:'sticky',top:80 }}>
             <h2 style={{ fontSize:22,letterSpacing:2,marginBottom:18 }}>Order Summary</h2>
             <div style={{ display:'flex',flexDirection:'column',gap:13,marginBottom:18 }}>
               {cart.map(item => (

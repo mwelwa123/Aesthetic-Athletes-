@@ -47,7 +47,7 @@ export default function OrdersPage() {
               const isOpen = expanded === order.id
               return (
                 <div key={order.id} className="card" style={{ padding:0,overflow:'hidden' }}>
-                  <button onClick={()=>setExpanded(isOpen?null:order.id)} style={{ width:'100%',background:'none',border:'none',cursor:'pointer',color:'var(--text-dark)',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'20px 24px',gap:16 }}>
+                  <button onClick={()=>setExpanded(isOpen?null:order.id)} className="customer-order-toggle" style={{ width:'100%',background:'none',border:'none',cursor:'pointer',color:'var(--text-dark)',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'20px 24px',gap:16 }}>
                     <div style={{ display:'flex',alignItems:'center',gap:24,flex:1,flexWrap:'wrap' }}>
                       <div>
                         <p style={{ fontSize:10,color:'rgba(255,255,255,.38)',fontWeight:700,letterSpacing:1.5,textTransform:'uppercase',marginBottom:3 }}>Order ID</p>
@@ -67,7 +67,7 @@ export default function OrdersPage() {
                   </button>
 
                   {isOpen && (
-                    <div style={{ borderTop:'1px solid rgba(255,255,255,.06)',padding:'18px 24px' }}>
+                    <div className="customer-order-details" style={{ borderTop:'1px solid rgba(255,255,255,.06)',padding:'18px 24px' }}>
                       <p style={{ fontSize:10,fontWeight:700,letterSpacing:2,textTransform:'uppercase',color:'rgba(255,255,255,.38)',marginBottom:14 }}>Items</p>
                       <div style={{ display:'flex',flexDirection:'column',gap:11 }}>
                         {order.order_items?.map(item => (
