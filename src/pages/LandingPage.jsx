@@ -149,9 +149,9 @@ export default function LandingPage() {
             >
               TRAIN
               <br/>
-              LIKE A
+              LIKE A CHAMPION
               <br/>
-              <span
+              {/* <span
                 style={{
                   background:'linear-gradient(90deg,var(--cyan),var(--cyan-l))',
                   WebkitBackgroundClip:'text',
@@ -160,7 +160,7 @@ export default function LandingPage() {
                 }}
               >
                 CHAMPION
-              </span>
+              </span> */}
             </h1>
 
             <p
